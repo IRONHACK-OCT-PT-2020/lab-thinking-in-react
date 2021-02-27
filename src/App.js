@@ -10,8 +10,8 @@ class App extends React.Component {
   showProducts = () => {
     return this.state.products.map((each) => {
       return (
-        <li>
-          {each.name} - {each.price} - {each.category}
+        <li >
+          <span className={!each.stocked && "notInStock"}>{each.name}</span> - {each.price} - {each.category}
         </li>
       );
     });
