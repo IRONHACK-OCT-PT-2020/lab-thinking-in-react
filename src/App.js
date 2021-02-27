@@ -1,26 +1,28 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import jsondata from './data.json'
+class App extends React.Component { 
+  state = {
+    products : jsondata.data
+  }
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+ showProducts =()=>{
+  return this.state.products.map(each=>{
+     return <li>{each.name}</li>
+   })
+ }
+
+
+
+  render(){
+    return (
+      <div className="App">
+        {this.showProducts()}
+      </div>
+    );
+  }
 }
 
 export default App;
