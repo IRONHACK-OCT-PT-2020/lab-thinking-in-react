@@ -1,24 +1,40 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import jsondata from './data.json'
-class App extends React.Component { 
+import jsondata from './data.json';
+class App extends React.Component {
   state = {
-    products : jsondata.data
-  }
+    products: jsondata.data,
+  };
 
+  showProducts = () => {
+    return this.state.products.map((each) => {
+      return (
+        <li>
+          {each.name} - {each.price} - {each.category}
+        </li>
+      );
+    });
+  };
 
- showProducts =()=>{
-  return this.state.products.map(each=>{
-     return <li>{each.name}</li>
-   })
- }
+  search = (e) => {
+    console.log(e.target.value);
+    let filteredProduct = jsondata.data.filter((eachData) => {
+      return eachData.name.toLowerCase().includes(e.target.value.toLowerCase());
+    });
 
+    this.setState({ products: filteredProduct });
+  };
 
-
-  render(){
+  render() {
     return (
       <div className="App">
+        <input
+          name="search"
+          type="text"
+          placeholder="search"
+          onChange={this.search}
+        />
         {this.showProducts()}
       </div>
     );
